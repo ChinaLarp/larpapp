@@ -11,10 +11,12 @@ import {
   Image,
   ImageBackground,
   TouchableOpacity,
-  AsyncStorage
+  AsyncStorage,
+  Dimensions
 } from "react-native";
 import { StackNavigator } from "react-navigation";
 import signup from "./signup";
+const Screen = Dimensions.get("window");
 
 export default class home extends React.Component {
   constructor() {
@@ -130,7 +132,7 @@ export default class home extends React.Component {
                   placeholder="请输入密码"
                   style={styles.textinput}
                   onChangeText={password => this.setState({ password })}
-                  value={this.state.username}
+                  value={this.state.password}
                 />
                 <TouchableOpacity
                   onPress={onButtonPress}
@@ -286,8 +288,8 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(255,255,255,0.2)"
   },
   textinput: {
-    fontSize: 14,
-    height: 30,
+    fontSize: Screen.height * (1 / 48),
+    height: Screen.height * (1 / 24),
     padding: 5,
     margin: 5,
     backgroundColor: "rgba(255,255,255,0.8)"
@@ -296,15 +298,15 @@ const styles = StyleSheet.create({
     margin: 10,
     marginTop: 20,
     justifyContent: "center",
-    height: 30,
-    width: 120,
+    height: Screen.height * (1 / 24),
+    width: Screen.width * (2 / 7),
     alignSelf: "stretch",
     //borderWidth: 1,
     //borderColor: "#fff",
     backgroundColor: "rgba(32, 131, 135, 0.7)"
   },
   btnText: {
-    fontSize: 14,
+    fontSize: Screen.height * (1 / 48),
     color: "white",
     textAlign: "center"
   }

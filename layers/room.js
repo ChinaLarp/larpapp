@@ -46,13 +46,13 @@ export default class room extends React.Component {
         userPic: require("../assets/avatar/cat.jpg"), //or 'http://.png'
         userName: "瓜瓜1",
         userInfo: "帝王集团总裁家的猫，十分通人性，是一只网红猫。",
-        uToMe: "我和他关系非常好"
+        uToMe: "我和他关系不是非常好"
       },
       {
         userPic: require("../assets/avatar/cat.jpg"), //or 'http://.png'
         userName: "瓜瓜2",
         userInfo: "帝王集团总裁家的猫，十分通人性，是一只网红猫。",
-        uToMe: "我和他关系非常好"
+        uToMe: "我和他关系非常好红啊红啊后"
       },
       {
         userPic: require("../assets/avatar/cat.jpg"), //or 'http://.png'
@@ -69,8 +69,9 @@ export default class room extends React.Component {
       {
         userPic: require("../assets/avatar/cat.jpg"), //or 'http://.png'
         userName: "瓜瓜5",
-        userInfo: "帝王集团总裁家的猫，十分通人性，是一只网红猫。",
-        uToMe: "我和他关系非常好"
+        userInfo:
+          "帝王集团总裁家的猫，十分通人性，是一只网红猫，是一只网红猫，是一只网红猫，是一只网红猫，是一只网红猫，是一只网红猫，是一只网红猫。",
+        uToMe: "我和他关系非常非常非常非常非常非常好"
       }
     ];
     const { goBack, navigate } = this.props.navigation;
@@ -87,15 +88,19 @@ export default class room extends React.Component {
               source={require("../assets/Ahri.png")}
               accessibilityLabel="我"
               style={[
-                { width: 80, height: 80, margin: 10 },
+                {
+                  width: Screen.width * (12 / 50),
+                  height: Screen.height * (14 / 100),
+                  margin: 10
+                },
                 {
                   transform: [
                     {
                       matrix: [
-                        0.9,
+                        0.8,
                         0,
                         0.0,
-                        0.001,
+                        0.002,
                         0.0,
                         1,
                         0.0,
@@ -121,7 +126,12 @@ export default class room extends React.Component {
             <Image
               source={require("../assets/icon/people.png")}
               accessibilityLabel="玩家信息"
-              style={{ width: 35, height: 35, margin: 10 }}
+              style={{
+                width: Screen.width * (1 / 10),
+                height: Screen.height * (12 / 220),
+                resizeMode: "stretch",
+                margin: 5
+              }}
             />
           </TouchableOpacity>
           <Modal
@@ -153,7 +163,32 @@ export default class room extends React.Component {
                           borderTopLeftRadius: 5
                         }}
                       />
-                      <Text>{item.userName}</Text>
+                      <Text style={{ alignSelf: "center", fontWeight: "bold" }}>
+                        {item.userName}
+                      </Text>
+                    </View>
+                    <View style={styles.userInfoContainer}>
+                      <View
+                        style={{
+                          padding: 5,
+                          alignSelf: "center",
+                          overflow: "hidden",
+                          height: Screen.height * (3 / 32)
+                        }}
+                      >
+                        <Text style={{ overflow: "hidden" }} numberOfLines={3}>
+                          {item.userInfo}
+                        </Text>
+                      </View>
+                      <Text
+                        style={{
+                          alignSelf: "center",
+                          fontWeight: "bold"
+                        }}
+                        numberOfLines={1}
+                      >
+                        {item.uToMe}
+                      </Text>
                     </View>
                   </View>
                 );
@@ -162,16 +197,29 @@ export default class room extends React.Component {
             <TouchableOpacity
               onPress={() => this.setState({ visibleModal: null })}
             >
-              <View style={styles.button}>
-                <Text>Close</Text>
-              </View>
+              <Image
+                source={require("../assets/icon/close.png")}
+                accessibilityLabel="返回"
+                style={{
+                  margin: 5,
+                  padding: 5,
+                  width: Screen.width * (5 / 80),
+                  height: Screen.height * (7 / 176),
+                  resizeMode: "stretch"
+                }}
+              />
             </TouchableOpacity>
           </Modal>
           <TouchableOpacity onPress={() => this.setState({ visibleModal: 2 })}>
             <Image
               source={require("../assets/icon/setting.png")}
               accessibilityLabel="设置"
-              style={{ width: 35, height: 35, margin: 10 }}
+              style={{
+                width: Screen.width * (1 / 10),
+                height: Screen.height * (12 / 220),
+                resizeMode: "stretch",
+                margin: 5
+              }}
             />
           </TouchableOpacity>
           <Modal
@@ -200,7 +248,13 @@ export default class room extends React.Component {
             <Image
               source={require("../assets/icon/help.png")}
               accessibilityLabel="帮助"
-              style={{ width: 35, height: 35, margin: 10 }}
+              style={{
+                width: Screen.width * (1 / 10),
+                height: Screen.height * (11 / 220),
+                resizeMode: "stretch",
+                margin: 2,
+                marginTop: 5
+              }}
             />
           </TouchableOpacity>
           <Modal
@@ -231,7 +285,12 @@ export default class room extends React.Component {
             <Image
               source={require("../assets/icon/exit.png")}
               accessibilityLabel="退出房间"
-              style={{ width: 35, height: 35, margin: 10 }}
+              style={{
+                width: Screen.width * (1 / 10),
+                height: Screen.height * (11 / 220),
+                resizeMode: "stretch",
+                margin: 10
+              }}
             />
           </TouchableOpacity>
         </View>
@@ -280,14 +339,16 @@ const styles = StyleSheet.create({
     width: Screen.width * (2 / 3),
     height: Screen.height * (1 / 8),
     borderRadius: 5,
-    backgroundColor: "rgba(255,255,255,0.5)",
+    backgroundColor: "rgba(255,255,255,0.7)",
     flexDirection: "row",
     justifyContent: "flex-start"
   },
   userPicContainer: {
     width: Screen.width * (1 / 6)
   },
-
+  userInfoContainer: {
+    width: Screen.width * (1 / 2)
+  },
   modalContent: {
     backgroundColor: "white",
     padding: 22,
