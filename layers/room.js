@@ -82,42 +82,44 @@ export default class room extends React.Component {
         style={styles.backgroundImage}
       >
         <StatusBar hidden={true} />
-        <View style={styles.avatarContainer}>
+        <View
+          style={[
+            styles.avatarContainer,
+            {
+              transform: [
+                {
+                  matrix: [
+                    0.8,
+                    0,
+                    0.0,
+                    0.002,
+                    0.0,
+                    1,
+                    0.0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1
+                  ]
+                }
+              ]
+            }
+          ]}
+        >
           <TouchableOpacity onPress={onButtonPress}>
             <Image
               source={require("../assets/Ahri.png")}
               accessibilityLabel="我"
-              style={[
-                {
-                  width: Screen.width * (12 / 50),
-                  height: Screen.height * (14 / 100),
-                  margin: 10
-                },
-                {
-                  transform: [
-                    {
-                      matrix: [
-                        0.8,
-                        0,
-                        0.0,
-                        0.002,
-                        0.0,
-                        1,
-                        0.0,
-                        0,
-                        0,
-                        0,
-                        1,
-                        0,
-                        0,
-                        0,
-                        0,
-                        1
-                      ]
-                    }
-                  ]
-                }
-              ]}
+              style={{
+                width: Screen.width * (12 / 50),
+                height: Screen.height * (14 / 100),
+                margin: 10
+              }}
             />
           </TouchableOpacity>
         </View>
