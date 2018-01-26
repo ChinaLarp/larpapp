@@ -453,3 +453,67 @@ transitDoor: [{ perspective: 850 }, { rotateY: "-60deg" }]
     accessibilityLabel="返回"
   />
 </View>
+
+
+<Button
+  onPress={() => navigate("newGame")}
+  title="寻找新的故事"
+  color="#208387"
+  accessibilityLabel="寻找新的故事"
+/>
+<Button
+  onPress={() => navigate("joinGame")}
+  title="继续游戏/加入游戏"
+  color="#75a1a3"  //rgb(117, 161, 163)
+  accessibilityLabel="继续游戏、加入游戏"
+/>
+
+<TouchableOpacity
+  onPress={() => navigate("newGame")}
+  style={styles.btnContainer}
+>
+  <Text style={styles.btnText}>寻找新的故事</Text>
+</TouchableOpacity>
+
+<TouchableOpacity
+  onPress={() => navigate("joinGame")}
+  style={styles.btnContainer}
+>
+  <Text style={styles.btnText}>继续游戏/加入游戏</Text>
+</TouchableOpacity>
+
+{!this.state.status && (
+  <Button
+    onPress={onButtonPress}
+    title="选项"
+    color="#75b2a9"
+    accessibilityLabel="选项"
+  />
+)}
+{true && (
+  <Button
+    onPress={this.clear}
+    title="关于(logoff)"
+    color="gray"
+    accessibilityLabel="关于"
+  />
+)}
+
+{!this.state.status && (
+  <TouchableOpacity
+    onPress={onButtonPress}
+    style={{backgroundColor: "rgba(117, 161, 163, 0.9)"}}
+  >
+
+    <Text style={styles.btnText}>选项</Text>
+  </TouchableOpacity>
+)}
+{true && (
+  <TouchableOpacity
+    onPress={this.clear}
+    style={{backgroundColor: "rgba(192, 192, 192, 0.9)"}}
+  >
+
+    <Text style={styles.btnText}>关于(logoff)</Text>
+  </TouchableOpacity>
+)}

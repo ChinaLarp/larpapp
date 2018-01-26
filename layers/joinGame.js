@@ -24,6 +24,7 @@ import navigation from "react-navigation";
 import home from "../layers/home";
 import room from "../layers/room";
 import Matrix from "../utilities/matrixTrans"
+const Screen = Dimensions.get("window");
 
 class RoomCode extends React.Component {
   constructor() {
@@ -31,7 +32,7 @@ class RoomCode extends React.Component {
     this.state = { getcode: "", codeLength: 0, showInput: "ture" };
   }
   focusNextField(nextField, text) {
-    if (nextField < 6) {
+    if (nextField < 7) {
       this.refs[nextField].focus();
       this.setState({
         getcode: this.state.getcode + text,
@@ -94,8 +95,16 @@ class RoomCode extends React.Component {
         />
         <TextInput
           ref="5"
-          onChangeText={t5 =>
-            this.focusNextField("6", t5) &
+          onChangeText={t5 => this.focusNextField("6", t5)}
+          underlineColorAndroid="transparent"
+          style={styles.textinput}
+          maxLength={1}
+          caretHidden={true}
+        />
+        <TextInput
+          ref="6"
+          onChangeText={t6 =>
+            this.focusNextField("7", t6) &
             console.log(this.state.getcode.length)
           }
           underlineColorAndroid="transparent"
@@ -120,7 +129,7 @@ export default class joinGame extends React.Component {
   }
   _transform(){
     LayoutAnimation.linear();
-    const transformOrigin = [122, 0];
+    const transformOrigin = [Screen.width * 0.3, 0];
     const translate = [
        1, 0, 0, 0,
        0, 1, 0, 0,
@@ -159,19 +168,19 @@ export default class joinGame extends React.Component {
           >
             <View style={styles.back}>
               <TouchableOpacity
-                style={{ width: 35, height: 35, margin: 10 }}
+                style={{ width: Screen.width * 0.08, height: Screen.width * 0.08, margin: 10 }}
                 onPress={() => goBack()}
               >
                 <Image
                   source={require("../assets/icon/back.png")}
                   accessibilityLabel="返回"
-                  style={{ width: 35, height: 35 }}
+                  style={{ width: Screen.width * 0.08, height: Screen.width * 0.08 }}
                 />
               </TouchableOpacity>
               <Image
                 source={require("../assets/images/img_1.png")}
                 style={[
-                  { position: "absolute", top:0, left: 85, width: 225, height: 515 },
+                  { position: "absolute", top: 0, left: Screen.width * 0.2066, width: Screen.width * 0.546875, height: Screen.height * 0.75355},
                     {transform: [{matrix: this.state.matrix}]}
                 ]}
               />
@@ -193,7 +202,7 @@ export default class joinGame extends React.Component {
                   textAlign: "center",
                   color: "white",
                   fontWeight: "bold",
-                  fontSize: 16,
+                  fontSize: Screen.height * (1 / 48),
                   marginBottom: 2
                 }}
               >
@@ -222,9 +231,9 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   },
   textinput: {
-    fontSize: 16,
-    height: 40,
-    width: 40,
+    fontSize: Screen.height * (1 / 48),
+    height: Screen.width * 0.09,
+    width: Screen.width * 0.09,
     borderWidth: 1,
     borderColor: "#fff",
     backgroundColor: "rgba(0,0,0,1)",
@@ -242,11 +251,5 @@ const styles = StyleSheet.create({
     backgroundColor: "#75a1a3",
     alignSelf: "center",
     justifyContent: "center"
-  },
-  btnText: {
-    fontSize: 16,
-    color: "white",
-    textAlign: "center",
-    alignSelf: "center"
   }
 });

@@ -95,7 +95,10 @@ export default class home extends React.Component {
               <Image
                 source={require("../assets/images/achievement.png")}
                 accessibilityLabel="我的成就"
-                style={{ height: 40, width: 40 }}
+                style={{
+                  height: Screen.width * 0.09,
+                  width: Screen.width * 0.09
+                }}
               />
             </TouchableOpacity>
           )}
@@ -105,15 +108,15 @@ export default class home extends React.Component {
           style={{
             flex: 0.6,
             justifyContent: "space-around",
-            paddingLeft: 50,
-            paddingRight: 50
+            paddingLeft: Screen.width * (12 / 100),
+            paddingRight: Screen.width * (12 / 100)
           }}
         >
           {this.state.status && (
             <View
               style={{
-                marginTop: 80,
-                paddingTop: 80,
+                marginTop: Screen.height * (12 / 100),
+                paddingTop: Screen.height * (12 / 100),
                 justifyContent: "center",
                 alignItems: "center"
               }}
@@ -140,7 +143,7 @@ export default class home extends React.Component {
                 >
                   <Text
                     style={{
-                      fontSize: 12,
+                      fontSize: Screen.height * (0.9 / 48),
                       textDecorationLine: "underline",
                       color: "white"
                     }}
@@ -176,7 +179,10 @@ export default class home extends React.Component {
               >
                 <Image
                   source={require("../assets/images/login.png")}
-                  style={{ width: 320, height: 40 }}
+                  style={{
+                    width: Screen.width * 0.78,
+                    height: Screen.height * 0.06
+                  }}
                 />
                 <TouchableOpacity
                   onPress={onButtonPress}
@@ -185,7 +191,10 @@ export default class home extends React.Component {
                   <Image
                     source={require("../assets/icon/wx.png")}
                     accessibilityLabel="微信登录"
-                    style={{ width: 50, height: 45 }}
+                    style={{
+                      width: Screen.width * 0.122,
+                      height: Screen.height * 0.066
+                    }}
                   />
                 </TouchableOpacity>
               </View>
@@ -197,24 +206,41 @@ export default class home extends React.Component {
               style={{
                 flex: 0.4,
                 padding: 10,
-                paddingTop: 160,
-                paddingBottom: 30,
+                paddingTop: Screen.height * 0.234,
+                paddingBottom: Screen.height * 0.044,
                 justifyContent: "space-around",
                 opacity: 0.9
               }}
             >
-              <Button
+              <TouchableOpacity
                 onPress={() => navigate("newGame")}
-                title="寻找新的故事"
-                color="#208387"
-                accessibilityLabel="寻找新的故事"
-              />
-              <Button
+                style={{
+                  justifyContent: "center",
+                  height: Screen.height * (1.3 / 24),
+                  width: Screen.width * (5 / 7),
+                  alignSelf: "stretch",
+                  //borderWidth: 1,
+                  //borderColor: "#fff",
+                  backgroundColor: "rgba(32, 131, 135, 0.9)"
+                }}
+              >
+                <Text style={styles.btnText}>寻找新的故事</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
                 onPress={() => navigate("joinGame")}
-                title="继续游戏/加入游戏"
-                color="#75a1a3"
-                accessibilityLabel="继续游戏、加入游戏"
-              />
+                style={{
+                  justifyContent: "center",
+                  height: Screen.height * (1.3 / 24),
+                  width: Screen.width * (5 / 7),
+                  alignSelf: "stretch",
+                  //borderWidth: 1,
+                  //borderColor: "#fff",
+                  backgroundColor: "rgba(117, 161, 163, 0.9)"
+                }}
+              >
+                <Text style={styles.btnText}>继续游戏/加入游戏</Text>
+              </TouchableOpacity>
             </View>
           )}
         </View>
@@ -230,20 +256,30 @@ export default class home extends React.Component {
           }}
         >
           {!this.state.status && (
-            <Button
+            <TouchableOpacity
               onPress={onButtonPress}
-              title="选项"
-              color="#75b2a9"
-              accessibilityLabel="选项"
-            />
+              style={{
+                paddingHorizontal: 5,
+                height: Screen.height * (1 / 24),
+                backgroundColor: "rgba(117, 161, 163, 0.9)",
+                justifyContent: "center"
+              }}
+            >
+              <Text style={styles.btnText}>选项</Text>
+            </TouchableOpacity>
           )}
           {true && (
-            <Button
+            <TouchableOpacity
               onPress={this.clear}
-              title="关于(logoff)"
-              color="gray"
-              accessibilityLabel="关于"
-            />
+              style={{
+                paddingHorizontal: 5,
+                height: Screen.height * (1 / 24),
+                backgroundColor: "rgba(169, 169, 169, 0.9)",
+                justifyContent: "center"
+              }}
+            >
+              <Text style={styles.btnText}>关于(logoff)</Text>
+            </TouchableOpacity>
           )}
         </View>
       </ImageBackground>
@@ -251,6 +287,7 @@ export default class home extends React.Component {
   }
 
   clear = () => {
+    console.log(Screen.width, Screen.height);
     this.setState({
       status: !this.state.status
     });
