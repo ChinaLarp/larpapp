@@ -247,6 +247,7 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   },
   card: {
+    //这个属性没用
     //flex: 0.72,
     padding: 10,
     //marginLeft: 40,

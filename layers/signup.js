@@ -31,9 +31,9 @@ export default class signup extends React.Component {
         <View
           style={{
             flex: 0.5,
-            paddingTop: 40,
-            paddingLeft: 20,
-            paddingRight: 20,
+            paddingTop: Screen.height * 0.0585,
+            paddingLeft: Screen.width * 0.0486,
+            paddingRight: Screen.width * 0.0486,
             justifyContent: "center",
             alignItems: "center"
           }}
@@ -71,14 +71,16 @@ export default class signup extends React.Component {
           </View>
           <View style={styles.footer}>
             <View style={styles.textRow}>
-              <Text>已经有账户了?</Text>
+              <Text style={{ fontSize: Screen.height * (1 / 48) }}>
+                已经有账户了?
+              </Text>
               <TouchableOpacity
                 onPress={() => this.props.navigation.goBack()}
                 style={{ alignItems: "flex-end" }}
               >
                 <Text
                   style={{
-                    //fontSize: 12,
+                    fontSize: Screen.height * (1 / 48),
                     textDecorationLine: "underline"
                   }}
                 >
@@ -104,7 +106,7 @@ const styles = StyleSheet.create({
   },
   content: {
     justifyContent: "space-between",
-    paddingHorizontal: 30,
+    paddingHorizontal: Screen.width * 0.073,
     margin: 10,
     padding: 10,
     alignSelf: "stretch",
@@ -116,7 +118,7 @@ const styles = StyleSheet.create({
     margin: 5,
     marginTop: 10,
     justifyContent: "center",
-    height: 30,
+    height: Screen.height * 0.044,
     alignSelf: "stretch",
     //borderWidth: 1,
     //borderColor: "#fff",
@@ -124,14 +126,14 @@ const styles = StyleSheet.create({
   },
   buttons: {
     flexDirection: "row",
-    marginBottom: 24,
-    marginHorizontal: 24,
-    paddingHorizontal: 30,
+    marginBottom: Screen.height * 0.035,
+    marginHorizontal: Screen.width * 0.058,
+    paddingHorizontal: Screen.width * 0.073,
     justifyContent: "space-around"
   },
   footer: {
     flex: 0.1,
-    paddingTop: 20,
+    paddingTop: Screen.height * 0.029,
     justifyContent: "flex-end"
   },
   textRow: {
@@ -147,14 +149,14 @@ const styles = StyleSheet.create({
     //resizeMode: "stretch" // or 'stretch'
   },
   textinput: {
-    fontSize: 14,
-    height: 30,
-    padding: 5,
-    margin: 5,
+    fontSize: Screen.height * (1 / 48),
+    height: Screen.height * 0.044,
+    padding: Screen.width * 0.012,
+    margin: Screen.width * 0.012,
     backgroundColor: "rgba(255,255,255,0.9)"
   },
   btnText: {
-    fontSize: 14,
+    fontSize: Screen.height * (1 / 48),
     color: "white",
     textAlign: "center"
   }
