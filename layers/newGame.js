@@ -16,7 +16,7 @@ import {
   Dimensions
 } from "react-native";
 import { goBack } from "react-navigation";
-//const Screen = Dimensions.get("window");
+const Screen = Dimensions.get("window");
 const { UIManager } = NativeModules;
 UIManager.setLayoutAnimationEnabledExperimental &&
   UIManager.setLayoutAnimationEnabledExperimental(true);
@@ -25,12 +25,12 @@ export default class newGame extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      top: 90,
-      left: 40,
-      right: 40,
-      bottom: 90,
-      width: 280,
-      height: 205,
+      top: Screen.height * 0.1317,
+      left: Screen.width * 0.097,
+      right: Screen.width * 0.097,
+      bottom: Screen.height * 0.1317,
+      width: Screen.width * 0.68,
+      height: Screen.height * 0.3,
       y: 0,
       r: "-2deg",
       select: false
@@ -45,8 +45,8 @@ export default class newGame extends React.Component {
       left: 0,
       right: 0,
       bottom: 0,
-      width: 340,
-      height: 230,
+      width: Screen.width * 0.827,
+      height: Screen.height * 0.337,
       y: -50,
       r: "0deg",
       select: !this.state.select
@@ -58,12 +58,12 @@ export default class newGame extends React.Component {
     console.log("?");
     LayoutAnimation.linear();
     this.setState({
-      top: 90,
-      left: 40,
-      right: 40,
-      bottom: 90,
-      width: 280,
-      height: 205,
+      top: Screen.height * 0.1317,
+      left: Screen.width * 0.097,
+      right: Screen.width * 0.097,
+      bottom: Screen.height * 0.1317,
+      width: Screen.width * 0.68,
+      height: Screen.height * 0.3,
       y: 0,
       r: "-2deg",
       select: false
@@ -94,13 +94,20 @@ export default class newGame extends React.Component {
         {!this.state.select && (
           <View style={styles.back}>
             <TouchableOpacity
-              style={{ width: 35, height: 35, margin: 10 }}
+              style={{
+                width: Screen.width * 0.085,
+                height: Screen.width * 0.085,
+                margin: 10
+              }}
               onPress={() => goBack()}
             >
               <Image
                 source={require("../assets/icon/back.png")}
                 accessibilityLabel="返回"
-                style={{ width: 35, height: 35 }}
+                style={{
+                  width: Screen.width * 0.085,
+                  height: Screen.width * 0.085
+                }}
               />
             </TouchableOpacity>
           </View>
@@ -136,13 +143,19 @@ export default class newGame extends React.Component {
                   }}
                 >
                   <TouchableOpacity
-                    style={{ width: 35, height: 35 }}
+                    style={{
+                      width: Screen.width * 0.085,
+                      height: Screen.width * 0.085
+                    }}
                     onPress={this.unPress}
                   >
                     <Image
                       source={require("../assets/corner.png")}
                       accessibilityLabel="返回"
-                      style={{ width: 35, height: 35 }}
+                      style={{
+                        width: Screen.width * 0.085,
+                        height: Screen.width * 0.085
+                      }}
                     />
                   </TouchableOpacity>
                 </View>
@@ -169,14 +182,16 @@ export default class newGame extends React.Component {
                 <View style={{ alignItems: "flex-start" }}>
                   <Text
                     style={{
-                      fontSize: 16,
+                      fontSize: Screen.height * (1.2 / 48),
                       fontWeight: "bold",
                       alignItems: "center"
                     }}
                   >
                     {item.gameTitle}
                   </Text>
-                  <Text>{item.gameInfo}</Text>
+                  <Text style={{ fontSize: Screen.height * (1 / 48) }}>
+                    {item.gameInfo}
+                  </Text>
                 </View>
               </View>
               {!this.state.select && (
@@ -184,12 +199,18 @@ export default class newGame extends React.Component {
                   <TouchableOpacity
                     //onPress={() => console.log({ idx })}
                     onPress={this._onPress}
-                    style={{ width: 70, height: 72 }}
+                    style={{
+                      width: Screen.width * 0.17,
+                      height: Screen.height * 0.105
+                    }}
                   >
                     <Image
                       source={require("../games/create.png")}
                       accessibilityLabel="创建游戏"
-                      style={{ width: 70, height: 72 }}
+                      style={{
+                        width: Screen.width * 0.17,
+                        height: Screen.height * 0.105
+                      }}
                     />
                   </TouchableOpacity>
                 </View>
