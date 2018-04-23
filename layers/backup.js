@@ -517,3 +517,49 @@ transitDoor: [{ perspective: 850 }, { rotateY: "-60deg" }]
     <Text style={styles.btnText}>关于(logoff)</Text>
   </TouchableOpacity>
 )}
+
+//相机模板
+
+<Modal
+  isVisible={this.state.visibleModal === 4}
+  animationIn={"zoomInDown"}
+  animationOut={"zoomOutDown"}
+  animationInTiming={1500}
+  animationOutTiming={1500}
+  backdropTransitionInTiming={1000}
+  backdropTransitionOutTiming={1000}
+  onBackdropPress={() => this.setState({ visibleModal: null })}
+>
+  <TouchableOpacity
+    onPress={() => this.setState({ visibleModal: null })}
+  >
+    <Image
+      source={require("../assets/icon/close.png")}
+      accessibilityLabel="返回"
+      style={{
+        alignSelf: 'flex-end',
+        margin: 5,
+        padding: 5,
+        width: Screen.width * (5 / 80),
+        height: Screen.height * (7 / 176),
+        resizeMode: "stretch"
+      }}
+    />
+  </TouchableOpacity>
+  <ImageBackground
+  source={require("../assets/room/clue_bg.png")}
+  style={{flex:0.5}}
+  >
+
+    <View style={styles.modalContent}>
+    <Carousel
+      ref={(c) => { this._carousel = c; }}
+      data={this.state.data}
+      renderItem={this._renderItem}
+      sliderWidth={sliderWidth}
+      itemWidth={itemWidth}
+    />
+    </View>
+
+  </ImageBackground>
+</Modal>

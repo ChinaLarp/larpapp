@@ -15,6 +15,10 @@ import {
 } from "react-native";
 import { goBack, NavigationActions } from "react-navigation";
 import Modal from "react-native-modal";
+import Carousel from "react-native-snap-carousel";
+import { ENTRIES1, ENTRIES2, ENTRIES3 } from "../utilities/entries";
+import SliderEntry from "../utilities/SliderEntry";
+import { colors } from "../utilities/index.style";
 import home from "../layers/home";
 import joinGame from "../layers/joinGame";
 import joinGameKey from "../layers/joinGame";
@@ -26,6 +30,21 @@ export default class room extends React.Component {
     this.state = {
       visibleModal: null
     };
+  }
+
+  _renderItem({ item, index }) {
+    return <SliderEntry data={item} even={true} />;
+  }
+
+  _renderItemWithParallax({ item, index }, parallaxProps) {
+    return (
+      <SliderEntry
+        data={item}
+        even={(index + 1) % 2 === 0}
+        parallax={true}
+        parallaxProps={parallaxProps}
+      />
+    );
   }
 
   render() {
@@ -68,7 +87,7 @@ export default class room extends React.Component {
       },
       {
         userPic: require("../assets/avatar/cat.jpg"), //or 'http://.png'
-        userName: "瓜瓜5",
+        userName: "瓜瓜呱呱呱呱呱瓜",
         userInfo:
           "帝王集团总裁家的猫，十分通人性，是一只网红猫，是一只网红猫，是一只网红猫，是一只网红猫，是一只网红猫，是一只网红猫，是一只网红猫。",
         uToMe: "我和他关系非常非常非常非常非常非常好"
@@ -82,6 +101,7 @@ export default class room extends React.Component {
         style={styles.backgroundImage}
       >
         <StatusBar hidden={true} />
+
         <View
           style={[
             styles.avatarContainer,
@@ -123,6 +143,7 @@ export default class room extends React.Component {
             />
           </TouchableOpacity>
         </View>
+
         <View style={styles.iconContainer}>
           <TouchableOpacity onPress={() => this.setState({ visibleModal: 1 })}>
             <Image
@@ -282,6 +303,137 @@ export default class room extends React.Component {
           </Modal>
         </View>
 
+        <View
+          style={{
+            position: "absolute",
+            top: Screen.height * (0.75 / 5),
+            left: Screen.width * (0.76 / 5),
+            width: Screen.width * (6.4 / 10),
+            height: Screen.height * (0.98 / 6)
+          }}
+        >
+          <TouchableOpacity onPress={() => this.setState({ visibleModal: 4 })}>
+            <Image
+              source={require("../assets/room/hint.png")}
+              accessibilityLabel="相机（提示）"
+              style={{
+                width: Screen.width * (6.4 / 10),
+                height: Screen.height * (0.95 / 6),
+                resizeMode: "stretch",
+                margin: 10
+              }}
+            />
+          </TouchableOpacity>
+        </View>
+
+        <Modal
+          isVisible={this.state.visibleModal === 4}
+          animationIn={"zoomInDown"}
+          animationOut={"zoomOutDown"}
+          animationInTiming={1500}
+          animationOutTiming={1500}
+          backdropTransitionInTiming={1000}
+          backdropTransitionOutTiming={1000}
+          backdropOpacity={0.9}
+          onBackdropPress={() => this.setState({ visibleModal: null })}
+        >
+          <TouchableOpacity
+            onPress={() => this.setState({ visibleModal: null })}
+          >
+            <Image
+              source={require("../assets/icon/close.png")}
+              accessibilityLabel="返回"
+              style={{
+                alignSelf: "flex-end",
+                margin: 5,
+                padding: 5,
+                width: Screen.width * (5 / 80),
+                height: Screen.height * (7 / 176),
+                resizeMode: "stretch"
+              }}
+            />
+          </TouchableOpacity>
+          <ImageBackground
+            source={require("../assets/room/clue_bg.png")}
+            style={{ flex: 1 }}
+          >
+            <View
+              style={{
+                flex: 1,
+                justifyContent: "center",
+                paddingTop: 0.05 * Screen.height
+              }}
+            >
+              <Carousel
+                ref={c => (this._slider1Ref = c)}
+                data={ENTRIES3}
+                //renderItem={this._renderItemWithParallax}
+                //hasParallaxImages={true}
+                renderItem={this._renderItem}
+                sliderWidth={Screen.width}
+                itemWidth={Screen.width}
+                inactiveSlideScale={0.94}
+                inactiveSlideOpacity={0.7}
+                // inactiveSlideShift={20}
+                containerCustomStyle={styles.slider}
+                contentContainerCustomStyle={styles.sliderContentContainer}
+                layout={"tinder"}
+                layoutCardOffset={9}
+                loop={true}
+                //loopClonesPerSide={2}
+                //autoplay={true}
+                //autoplayDelay={500}
+                //autoplayInterval={3000}
+                onSnapToItem={index =>
+                  this.setState({ slider1ActiveSlide: index })
+                }
+              />
+            </View>
+          </ImageBackground>
+        </Modal>
+
+        <View
+          style={{
+            flexDirection: "row",
+            position: "absolute",
+            top: Screen.height * (2.6 / 7),
+            left: 0,
+            height: Screen.height * (3.4 / 7),
+            width: Screen.width
+          }}
+        >
+          <TouchableOpacity
+            onPress={onButtonPress}
+            style={{
+              width: Screen.width * (1.25 / 3),
+              height: Screen.height * (1.4 / 3)
+            }}
+          >
+            <Image
+              source={require("../assets/room/search.png")}
+              accessibilityLabel="放大镜（搜索）"
+              style={{
+                width: Screen.width * (1.42 / 3),
+                height: Screen.height * (1.4 / 3),
+                left: -Screen.width * (0.8 / 20),
+                marginTop: Screen.height * (0.8 / 20)
+              }}
+            />
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={onButtonPress}>
+            <Image
+              source={require("../assets/room/info.png")}
+              accessibilityLabel="记事本（信息）"
+              style={{
+                width: Screen.width * (1.21 / 2),
+                height: Screen.height * (3.3 / 7),
+                resizeMode: "stretch"
+              }}
+            />
+          </TouchableOpacity>
+        </View>
+
         <View style={styles.back}>
           <TouchableOpacity onPress={() => goBack(global.joinGameKey)}>
             <Image
@@ -367,5 +519,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderRadius: 4,
     borderColor: "rgba(0, 0, 0, 0.1)"
+  },
+  slider: {
+    marginTop: 10,
+    overflow: "visible" // for custom animations
+  },
+  sliderContentContainer: {
+    paddingVertical: 10 // for custom animation
   }
 });
